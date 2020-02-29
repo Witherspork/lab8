@@ -120,8 +120,9 @@ module MakeInterval (Endpoint : ORDERED_TYPE) =
       | Empty, Interval _
       | Interval _, Empty -> Empty
       | Interval (x1, y1), Interval (x2, y2) ->
-        let (_, a), (b, _)  = ordered x1 x2,
-                              ordered y1 y2 in create a b
+        if contains intvl1 x2 then Interval (x2, y1)
+        else if contains intvl2 x1 then Interval (x1, y2)
+        else Empty
 
     end ;;
 
